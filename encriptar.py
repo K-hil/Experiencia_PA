@@ -23,15 +23,16 @@ def encriptar_mensaje(mensaje: str) -> str:
 
     with open('libro_super_secreto.txt', 'r') as libro:
         lineas = libro.readlines()
-        mensaje_encriptado = ''
-        for letra in mensaje:
-            if letra not in (' ', '\n'):
-                pos_linea = encontrar_en_lineas(letra, lineas)
-                pos_palabra, pos_letra = encontrar_en_palabras(letra, lineas[pos_linea].split(' '))
-                mensaje_encriptado += f'{pos_linea},{pos_palabra},{pos_letra}'
-            else:
-                mensaje_encriptado += ';'
-    return mensaje_encriptado
+    mensaje_encriptado = ''
+    for letra in mensaje:
+        if letra not in (' ', '\n'):
+            pos_linea = encontrar_en_lineas(letra, lineas)
+            pos_palabra, pos_letra = encontrar_en_palabras(letra, lineas[pos_linea].split(' '))
+            mensaje_encriptado += f'{pos_linea},{pos_palabra},{pos_letra},'
+        else:
+            mensaje_encriptado = mensaje_encriptado[:-1]
+            mensaje_encriptado += ';'
+    return mensaje_encriptado[:-1]
 
 
 def encontrar_en_palabras(letra, palabras):
